@@ -1,5 +1,10 @@
 (add-to-list 'load-path "~/emacs")
 
+(defun delete-trailing-whitespace-hook ()
+    (setq show-trailing-whitespace t)
+    (make-local-hook 'before-save-hook)
+    (add-hook 'before-save-hook 'delete-trailing-whitespace))
+
 (when (file-exists-p "~/emacs/lang.el")
   (load "~/emacs/lang.el"))
 
@@ -136,6 +141,8 @@
 		indent-tabs-mode nil) 
   )
 (add-hook 'c-mode-hook 'my-indent-setup)
+(add-hook 'c-mode-hook 'delete-trailing-whitespace-hook)
+
 ; "gnu" | "k&r" | "linux" | "bsd" | "stroustrup" | "python" | "java" | "user"
 (setq c-default-style "k&r") 
 (global-set-key (kbd "C-c u") 'uncomment-region)

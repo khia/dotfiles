@@ -30,11 +30,6 @@
     (require 'refactorerl))
 )
 
-(defun delete-trailing-whitespace-hook ()
-    (setq show-trailing-whitespace t)
-    (make-local-hook 'before-save-hook)
-    (add-hook 'before-save-hook 'delete-trailing-whitespace))
-
 (defun init-distel ()
   "Set distel configuration."
   (setq distel-path (concat (getenv "HOME") "/emacs/distel-wrangler/elisp"))
