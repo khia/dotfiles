@@ -11,10 +11,15 @@
 (when (file-exists-p "~/emacs/priv.el")
   (load "~/emacs/priv.el"))
 
+
 ;; Access to remote files
-(setq tramp-default-user "khia")
-(setq tramp-default-method "ssh")
-(require 'tramp)
+(defun init-tramp ()
+  "Set tramp configuration."
+  (setq tramp-default-user "khia")
+  (setq tramp-default-method "ssh")
+  (require 'tramp))  
+(when (locate-library "tramp")
+  (init-tramp))
 
 (set 'man-path "/usr/share/man")
 
@@ -125,33 +130,6 @@
 (when (file-exists-p "~/emacs/dvc")
   (init-dvc))
 
-;=================================================
-; C & C++ & Java specific
-;-----------------
-(defun my-bind-clb ()
-  (define-key c-mode-base-map (kbd "RET") 'c-context-line-break))
-(add-hook 'c-initialization-hook 'my-bind-clb)
-
-(defun my-indent-setup ()
-  (c-set-offset 'arglist-intro '8)
-  (c-set-offset 'arglist-cont '0)
-  (setq-default c-basic-offset 2
-		tab-width 2
-		;; Use spaces instead of tabs
-		indent-tabs-mode nil) 
-  )
-(add-hook 'c-mode-hook 'my-indent-setup)
-(add-hook 'c-mode-hook 'delete-trailing-whitespace-hook)
-
-; "gnu" | "k&r" | "linux" | "bsd" | "stroustrup" | "python" | "java" | "user"
-(setq c-default-style "k&r") 
-(global-set-key (kbd "C-c u") 'uncomment-region)
-;=================================================
-
-;;; graphwiz mode
-(autoload 'graphviz-dot-mode "graphviz-dot-mode" "graphviz-dot Editing Mode" t)
-(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
-
 ; disable vc (version control) module as we have DVC (distributed version control) installed
 ;(setq vc-handled-backends nil)
 (custom-set-variables
@@ -179,16 +157,6 @@
      (concat "find " dir " -name \"" exp "\" -print | xargs etags -o " dir "/TAGS -")
      ))
   (add-to-list 'tags-table-list dir))
-
-;; erlang specific
-(when (file-exists-p "~/emacs/erlang.el")
-  (load "~/emacs/erlang.el"))
-
-;; SCONS
- (setq auto-mode-alist
-      (cons '("SConstruct" . python-mode) auto-mode-alist))
- (setq auto-mode-alist
-      (cons '("SConscript" . python-mode) auto-mode-alist))
 
 ;; for changing default compile command uncoment next line
 ;; (defvar compile-command "scons") 
@@ -219,9 +187,6 @@
     (interactive)
     (mapc 'kill-buffer (buffer-list)))
 
-(when (file-exists-p "~/emacs/track.el")
-  (load "~/emacs/track.el"))
-
 ;; Save temp file in different directory
 ;; make-directory
 (defun init-backups ()
@@ -242,3 +207,30 @@
 
 (when (file-exists-p "~/emacs/color-theme")
   (init-color-theme))
+
+;; =================================================
+;; Modes specific configuration
+;; ----------------------------
+
+;; C & C++ & Java specific
+(when (file-exists-p "~/emacs/c.el")
+  (load "~/emacs/c.el"))
+
+;;; graphwiz mode
+(autoload 'graphviz-dot-mode "graphviz-dot-mode" "graphviz-dot Editing Mode" t)
+(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
+
+;; erlang specific
+(when (file-exists-p "~/emacs/erlang.el")
+  (load "~/emacs/erlang.el"))
+
+;; SCONS
+ (setq auto-mode-alist
+      (cons '("SConstruct" . python-mode) auto-mode-alist))
+ (setq auto-mode-alist
+      (cons '("SConscript" . python-mode) auto-mode-alist))
+
+(when (file-exists-p "~/emacs/track.el")
+  (load "~/emacs/track.el"))
+
+
