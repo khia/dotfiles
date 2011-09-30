@@ -41,7 +41,7 @@
 ;; Tag Completion
 (global-set-key [C-tab] 'complete-tag)   ; Control tab quotes a tab.
 (setq tags-table-list
-           '("~/emacs"))
+           '("~/emacs" "~/dev"))
 
 (global-set-key "\M-\C-g" 'goto-line)
 (setq visible-bell t)

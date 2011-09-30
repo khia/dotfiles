@@ -2,7 +2,19 @@
 ;; Enable UTF-8 environment 
 (set-language-environment 'UTF-8)
 
-(set-default-font "-*-fixed-medium-r-normal-*-14-*-*-*-*-*-iso10646-1")
+;;-----------------------------------------------------------------------------
+;; ================
+;; Home
+;; ----------------
+(set-default-font"-*-fixed-medium-r-normal-*-20-*-*-*-*-*-iso10646-1")
+
+;; ================
+;; Work
+;; ----------------
+;;(set-default-font "-*-fixed-medium-r--*-20-*-*-*-m-*-iso10646-1")
+;;(set-default-font "-*-terminal-medium-r--*-20-*-*-*-m-*-iso10646-1")
+;;-----------------------------------------------------------------------------
+
 ;;(set-default-font "fontset-standard")
 
 ;; UTF-8 for screen output
