@@ -187,15 +187,30 @@
     (interactive)
     (mapc 'kill-buffer (buffer-list)))
 
+
 ;; Save temp file in different directory
-;; make-directory
 (defun init-backups ()
-  (unless (file-exists-p "~/emacs/backups") (make-directory "~/emacs/backups"))
+  ;; Put backup files (ie foo~) in ~/emacs/.
   (setq backup-directory "~/emacs/backups")
+  (unless (file-exists-p backup-directory) 
+    (make-directory backup-directory))
   (setq backup-directory-alist
-	`((".*" . ,backup-directory)))
+        `((".*" . , backup-directory)))
   (setq auto-save-file-name-transforms
-	`((".*" ,backup-directory t)))
+        `((".*" , backup-directory t)))
+  (setq backup-by-copying t)
+  ;; If backup-by-copying is too slow
+  ;; (setq backup-by-copying-when-linked t)
+  (setq delete-old-versions t
+        kept-new-versions 6
+        kept-old-versions 2
+        version-control t)
+  ;; Put autosave files (ie #foo#) in ~/emacs/.
+  (setq autosaves-directory "~/emacs/autosaves")
+  (unless (file-exists-p autosaves-directory)
+    (make-directory autosaves-directory))
+  '(auto-save-file-name-transforms
+    '((".*" (format "%s/\\1" autosaves-directory) t)))
 )
 (init-backups)
 
