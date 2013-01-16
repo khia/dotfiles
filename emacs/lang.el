@@ -1,12 +1,13 @@
 ;; UTF-8 specific
-;; Enable UTF-8 environment 
+;; Enable UTF-8 environment
 (set-language-environment 'UTF-8)
 
 ;;-----------------------------------------------------------------------------
 ;; ================
 ;; Home
 ;; ----------------
-(set-default-font"-*-fixed-medium-r-normal-*-20-*-*-*-*-*-iso10646-1")
+;;(set-default-font"-*-fixed-medium-r-normal-*-20-*-*-*-*-*-iso10646-1")
+(set-frame-font "DejaVu Sans Mono")
 
 ;; ================
 ;; Work
