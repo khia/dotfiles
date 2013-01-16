@@ -10,7 +10,7 @@
 ;; =================== Helper functions ==================
 (defun set-otp-variables ()
   "Set otp variables."
-  (setq otp_version "R14B-3")
+  (setq otp_version "R15B03")
   (setq otp_preffix "/opt/")
   ;;(setq erlang-root-dir (concat otp_preffix otp_version "/lib/erlang/lib/"))
   (setq erlang-root-dir (concat otp_preffix otp_version))
